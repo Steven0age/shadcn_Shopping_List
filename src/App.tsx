@@ -1,22 +1,16 @@
-import { Button } from "./components/ui/button";
-import { Toaster } from "./components/ui/sonner";
-import { toast } from "sonner";
+import ItemsList from "./components/ui/ItemsList.tsx/ItemsList";
+import InputSection from "./components/InputSection/InputSection";
 
 function App() {
   return (
     <>
-      <h1 className="bg-blue-600 text-white text-3xl font-bold">Hallo Welt</h1>
-      <Button
-        className="mt-10"
-        onClick={() =>
-          toast("Geklickt", {
-            description: "Button wurde angeklickt",
-          })
-        }
-      >
-        Es klappt
-      </Button>
-      <Toaster />
+      <div className="mt-16 px-4 w-full">
+        <h1 className="text-3xl text-center font-semibold mb-10">
+          Einkaufsliste
+        </h1>
+        <InputSection />
+        <ItemsList />
+      </div>
     </>
   );
 }
