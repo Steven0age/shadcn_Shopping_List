@@ -6,33 +6,101 @@ import {
   CardHeader,
 } from "../card";
 import { Button } from "../button";
+import { useState } from "react";
 
-export default function SingleItem() {
+type SingleItemsProps = {
+  checked: boolean;
+  item: string;
+  quantity: number;
+};
+
+export default function SingleItem({
+  item,
+  quantity,
+  checked = false,
+}: SingleItemsProps) {
+  const [isChecked, setIsChecked] = useState(checked);
+
   return (
-    <Card className="mb-2">
-      <CardHeader>
-        <CardTitle className="text-lg">Kartoffel</CardTitle>
-        <CardDescription> Anzahl: 1</CardDescription>
-        <CardAction className="self-center">
-          <Button className="w-35" variant="outline" size="lg">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
-            Abhaken
-          </Button>
-        </CardAction>
-      </CardHeader>
-    </Card>
+    <>
+      <Card className="mb-2">
+        <CardHeader>
+          {isChecked && (
+            <CardTitle className="text-lg line-through text-gray-500">
+              {item}
+            </CardTitle>
+          )}
+          {!isChecked && <CardTitle className="text-lg">{item}</CardTitle>}
+          <CardDescription> Anzahl: {quantity}</CardDescription>
+          <CardAction className="self-center">
+            {isChecked && (
+              <div className="flex gap-2">
+                <Button variant="destructive" size="icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                    />
+                  </svg>
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  onClick={() => setIsChecked(false)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+                    />
+                  </svg>
+                  Zurück
+                </Button>
+              </div>
+            )}
+            {!isChecked && (
+              <Button
+                className="w-35"
+                variant="outline"
+                size="lg"
+                onClick={() => setIsChecked(true)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
+                </svg>
+                Abhaken
+              </Button>
+            )}
+          </CardAction>
+        </CardHeader>
+      </Card>
+    </>
   );
 }
