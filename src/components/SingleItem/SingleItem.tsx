@@ -4,21 +4,16 @@ import {
   CardDescription,
   CardTitle,
   CardHeader,
-} from "../card";
-import { Button } from "../button";
+} from "../ui/card";
+import { Button } from "../ui/button";
 import { useState } from "react";
-
-type SingleItemsProps = {
-  checked: boolean;
-  item: string;
-  quantity: number;
-};
+import { ShoppingItem } from "../types/ShoppingItem";
 
 export default function SingleItem({
   item,
   quantity,
   checked = false,
-}: SingleItemsProps) {
+}: ShoppingItem) {
   const [isChecked, setIsChecked] = useState(checked);
 
   return (

@@ -1,4 +1,4 @@
-import ItemsList from "./components/ui/ItemsList.tsx/ItemsList";
+import ItemsList from "./components/ItemsList.tsx/ItemsList";
 import InputSection from "./components/InputSection/InputSection";
 
 function App() {
