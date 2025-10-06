@@ -1,14 +1,10 @@
-import { useReducer } from "react";
+import { useContext } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import shoppingListReducer from "@/hooks/shoppingListReducer";
+import { ShoppingListContext } from "@/context/shoppingListContext";
 
 export default function InputSection() {
-  const [currentList, dispatchCurrentList] = useReducer(
-    shoppingListReducer,
-    []
-  );
-
+  const { dispatchCurrentItems } = useContext(ShoppingListContext);
   return (
     <div className="flex flex-col gap-2 mb-6">
       <div className="grid grid-cols-[auto_60px] gap-2">
@@ -19,8 +15,8 @@ export default function InputSection() {
         onClick={() => {
           //console.log("Button clicked");
           //console.log("currentList =", currentList);
-          dispatchCurrentList({
-            item: { id: 3, item: "Melone", quantity: 3, checked: false },
+          dispatchCurrentItems({
+            item: { id: -1, item: "Apfel", quantity: 3, checked: false },
             type: "ADD_ITEM",
           });
           //console.log("currentList nach dem Reducer =", currentList);

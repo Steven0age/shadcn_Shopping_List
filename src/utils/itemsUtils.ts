@@ -25,3 +25,12 @@ export function nextFreeID(currentItems: ShoppingItem[]) {
 
   return lowestUnusedNumber;
 }
+
+export function fetchItemsFromLs(): ShoppingItem[] {
+  const stored = localStorage.getItem("shoppingList");
+  if (!stored) {
+    return [];
+  }
+  const UnJSON = JSON.parse(stored);
+  return UnJSON;
+}

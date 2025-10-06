@@ -1,9 +1,9 @@
 import { nextFreeID } from "@/utils/itemsUtils";
 import { ShoppingItem } from "../types/ShoppingItem";
 
-type shoppingListReducerState = ShoppingItem[];
+export type shoppingListReducerState = ShoppingItem[];
 
-type shoppingListReducerAction = {
+export type shoppingListReducerAction = {
   type: "ADD_ITEM" | "DELETE_ITEM";
   item: ShoppingItem;
 };
