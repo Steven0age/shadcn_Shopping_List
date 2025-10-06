@@ -1,4 +1,4 @@
-import { ShoppingItem } from "@/components/types/ShoppingItem";
+import { ShoppingItem } from "@/types/ShoppingItem";
 
 export function nextFreeID(currentItems: ShoppingItem[]) {
   let lowestUnusedNumber = -1;

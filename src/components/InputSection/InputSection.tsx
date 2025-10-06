@@ -1,8 +1,14 @@
+import { useReducer } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { toast } from "sonner";
+import shoppingListReducer from "@/hooks/shoppingListReducer";
 
 export default function InputSection() {
+  const [currentList, dispatchCurrentList] = useReducer(
+    shoppingListReducer,
+    []
+  );
+
   return (
     <div className="flex flex-col gap-2 mb-6">
       <div className="grid grid-cols-[auto_60px] gap-2">
@@ -10,11 +16,15 @@ export default function InputSection() {
         <Input className="text-sm" type="number"></Input>
       </div>
       <Button
-        onClick={() =>
-          toast("Geklickt", {
-            description: "Button wurde angeklickt",
-          })
-        }
+        onClick={() => {
+          //console.log("Button clicked");
+          //console.log("currentList =", currentList);
+          dispatchCurrentList({
+            item: { id: 3, item: "Melone", quantity: 3, checked: false },
+            type: "ADD_ITEM",
+          });
+          //console.log("currentList nach dem Reducer =", currentList);
+        }}
       >
         Eintrag Hinzufügen
       </Button>

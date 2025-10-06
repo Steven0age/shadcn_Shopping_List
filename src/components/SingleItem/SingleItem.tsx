@@ -7,7 +7,7 @@ import {
 } from "../ui/card";
 import { Button } from "../ui/button";
 import { useState } from "react";
-import { ShoppingItem } from "../types/ShoppingItem";
+import { ShoppingItem } from "../../types/ShoppingItem";
 
 export default function SingleItem({
   item,
