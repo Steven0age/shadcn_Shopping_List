@@ -4,6 +4,7 @@ import { ShoppingListContext } from "@/context/shoppingListContext";
 
 export default function ItemsList() {
   const { currentItems } = useContext(ShoppingListContext);
+  const { dispatchCurrentItems } = useContext(ShoppingListContext);
   return (
     <div>
       {currentItems.map((item) => {
@@ -14,6 +15,17 @@ export default function ItemsList() {
             item={item.item}
             quantity={item.quantity}
             checked={item.checked}
+            clickHandler={() => {
+              dispatchCurrentItems({
+                item: {
+                  id: item.id,
+                  item: item.item,
+                  quantity: Number(item.quantity),
+                  checked: item.checked,
+                },
+                type: "DELETE_ITEM",
+              });
+            }}
           />
         );
       })}

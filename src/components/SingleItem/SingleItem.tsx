@@ -13,6 +13,7 @@ export default function SingleItem({
   item,
   quantity,
   checked = false,
+  clickHandler,
 }: ShoppingItem) {
   const [isChecked, setIsChecked] = useState(checked);
 
@@ -30,7 +31,12 @@ export default function SingleItem({
           <CardAction className="self-center">
             {isChecked && (
               <div className="flex gap-2">
-                <Button variant="destructive" size="icon">
+                <Button
+                  variant="destructive"
+                  size="icon"
+                  // onClick={()=>{dispatchCurrentItems({item:[e.target.id],type:"DELETE_ITEM"})}}>
+                  onClick={clickHandler}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

@@ -3,4 +3,5 @@ export type ShoppingItem = {
   item: string;
   quantity: number;
   checked: boolean;
+  clickHandler?: VoidFunction;
 };
