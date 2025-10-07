@@ -1,10 +1,22 @@
+import { useContext } from "react";
 import SingleItem from "../SingleItem/SingleItem";
+import { ShoppingListContext } from "@/context/shoppingListContext";
 
 export default function ItemsList() {
+  const { currentItems } = useContext(ShoppingListContext);
   return (
     <div>
-      <SingleItem id={1} item={"Kartoffeln"} quantity={2} checked={true} />
-      <SingleItem id={2} item={"Apfel"} quantity={2} checked={false} />
+      {currentItems.map((item) => {
+        return (
+          <SingleItem
+            key={item.id}
+            id={item.id}
+            item={item.item}
+            quantity={item.quantity}
+            checked={item.checked}
+          />
+        );
+      })}
     </div>
   );
 }
