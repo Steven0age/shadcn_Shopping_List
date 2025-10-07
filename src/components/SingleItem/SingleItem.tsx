@@ -6,14 +6,16 @@ import {
   CardHeader,
 } from "../ui/card";
 import { Button } from "../ui/button";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ShoppingItem } from "../../types/ShoppingItem";
+import { ShoppingListContext } from "@/context/shoppingListContext";
 
 export default function SingleItem({
   item,
   quantity,
   checked = false,
   clickHandler,
+  checkedHandler,
 }: ShoppingItem) {
   const [isChecked, setIsChecked] = useState(checked);
 
@@ -34,7 +36,6 @@ export default function SingleItem({
                 <Button
                   variant="destructive"
                   size="icon"
-                  // onClick={()=>{dispatchCurrentItems({item:[e.target.id],type:"DELETE_ITEM"})}}>
                   onClick={clickHandler}
                 >
                   <svg
@@ -52,11 +53,7 @@ export default function SingleItem({
                     />
                   </svg>
                 </Button>
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  onClick={() => setIsChecked(false)}
-                >
+                <Button variant="secondary" size="lg" onClick={checkedHandler}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -80,7 +77,7 @@ export default function SingleItem({
                 className="w-35"
                 variant="outline"
                 size="lg"
-                onClick={() => setIsChecked(true)}
+                onClick={checkedHandler}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

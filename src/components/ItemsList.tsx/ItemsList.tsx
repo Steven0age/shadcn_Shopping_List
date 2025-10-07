@@ -26,6 +26,17 @@ export default function ItemsList() {
                 type: "DELETE_ITEM",
               });
             }}
+            checkedHandler={() => {
+              dispatchCurrentItems({
+                item: {
+                  id: item.id,
+                  item: item.item,
+                  quantity: Number(item.quantity),
+                  checked: item.checked,
+                },
+                type: "UPDATE_ITEM",
+              });
+            }}
           />
         );
       })}

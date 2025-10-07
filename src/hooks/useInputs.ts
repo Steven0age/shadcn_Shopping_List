@@ -6,7 +6,6 @@ export default function useInputs() {
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
     setValue(e.target.value);
-    console.log("value =", value);
   }
 
   function handleIsCheckedChange() {
