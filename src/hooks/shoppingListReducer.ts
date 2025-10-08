@@ -1,5 +1,6 @@
 import { nextFreeID } from "@/utils/itemsUtils";
 import { ShoppingItem } from "../types/ShoppingItem";
+import { toast } from "sonner";
 
 export type shoppingListReducerState = ShoppingItem[];
 
@@ -12,15 +13,31 @@ export default function shoppingListReducer(
   action: shoppingListReducerAction
 ) {
   let updatedItems: shoppingListReducerState;
+  let validAction = true;
 
   switch (action.type) {
     case "ADD_ITEM": {
-      action.item.id = nextFreeID(currentItems);
-      updatedItems = [...currentItems, action.item];
+      if (
+        currentItems.find(
+          (item) => item.item.toLowerCase() === action.item.item.toLowerCase()
+        )
+      ) {
+        validAction = false;
+        toast.error("Hinzufügen fehlgeschlagen", {
+          description: "Das Produkt ist bereits in der Einkaufsliste vorhanden",
+        });
+        updatedItems = currentItems;
+      } else {
+        action.item.id = nextFreeID(currentItems);
+        updatedItems = [...currentItems, action.item];
+      }
       break;
     }
     case "DELETE_ITEM": {
       updatedItems = currentItems.filter((item) => item.id !== action.item.id);
+      toast("Produkt gelöscht", {
+        description: `${action.item.item} wurde aus der Einkaufsliste entfernt`,
+      });
       break;
     }
     case "UPDATE_ITEM": {
@@ -37,6 +54,8 @@ export default function shoppingListReducer(
       updatedItems = currentItems;
     }
   }
-  localStorage.setItem("shoppingList", JSON.stringify(updatedItems));
+  if (validAction) {
+    localStorage.setItem("shoppingList", JSON.stringify(updatedItems));
+  }
   return updatedItems;
 }

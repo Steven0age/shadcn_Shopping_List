@@ -10,36 +10,41 @@ export default function InputSection() {
   const itemQuantity = useInputs();
 
   return (
-    <div className="flex flex-col gap-2 mb-6">
-      <div className="grid grid-cols-[auto_60px] gap-2">
-        <Input
-          onChange={itemInput.handleInputChange}
-          className="text-sm"
-          placeholder="Produkt eingeben..."
-          value={itemInput.value}
-        ></Input>
-        <Input
-          onChange={itemQuantity.handleInputChange}
-          className="text-sm"
-          type="number"
-          value={itemQuantity.value}
-        ></Input>
-      </div>
-      <Button
-        onClick={() => {
-          dispatchCurrentItems({
-            item: {
-              id: -1,
-              item: itemInput.value,
-              quantity: Number(itemQuantity.value),
-              checked: false,
-            },
-            type: "ADD_ITEM",
-          });
-        }}
-      >
-        Eintrag Hinzufügen
-      </Button>
-    </div>
+    <>
+      <form className="flex flex-col gap-2 mb-6">
+        <div className="grid grid-cols-[auto_60px] gap-2">
+          <Input
+            onChange={itemInput.handleInputChange}
+            className="text-sm"
+            placeholder="Produkt eingeben..."
+            value={itemInput.value}
+          ></Input>
+          <Input
+            onChange={itemQuantity.handleInputChange}
+            className="text-sm"
+            type="number"
+            value={itemQuantity.value}
+          ></Input>
+        </div>
+        <Button
+          disabled={!itemInput.value ? true : false}
+          onClick={() => {
+            dispatchCurrentItems({
+              item: {
+                id: -1,
+                item: itemInput.value,
+                quantity: Number(itemQuantity.value),
+                checked: false,
+              },
+              type: "ADD_ITEM",
+            });
+            itemInput.clearInputValue();
+            itemQuantity.clearInputValue();
+          }}
+        >
+          Eintrag hinzufügen
+        </Button>
+      </form>
+    </>
   );
 }

@@ -7,8 +7,12 @@ export default function useInputs() {
     setValue(e.target.value);
   }
 
+  function clearInputValue() {
+    setValue("");
+  }
   return {
     value,
     handleInputChange,
+    clearInputValue,
   };
 }
