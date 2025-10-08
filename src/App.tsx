@@ -1,4 +1,4 @@
-import ItemsList from "./components/ItemsList.tsx/ItemsList";
+import ItemsList from "./components/ItemsList/ItemsList.tsx";
 import InputSection from "./components/InputSection/InputSection";
 import { useReducer } from "react";
 import shoppingListReducer from "./hooks/shoppingListReducer.ts";

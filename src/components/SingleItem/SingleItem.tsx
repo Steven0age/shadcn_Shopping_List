@@ -6,32 +6,28 @@ import {
   CardHeader,
 } from "../ui/card";
 import { Button } from "../ui/button";
-import { useContext, useState } from "react";
 import { ShoppingItem } from "../../types/ShoppingItem";
-import { ShoppingListContext } from "@/context/shoppingListContext";
 
 export default function SingleItem({
   item,
   quantity,
-  checked = false,
+  checked,
   clickHandler,
   checkedHandler,
 }: ShoppingItem) {
-  const [isChecked, setIsChecked] = useState(checked);
-
   return (
     <>
       <Card className="mb-2">
         <CardHeader>
-          {isChecked && (
-            <CardTitle className="text-lg line-through text-gray-500">
-              {item}
-            </CardTitle>
-          )}
-          {!isChecked && <CardTitle className="text-lg">{item}</CardTitle>}
+          <CardTitle
+            className={`text-lg ${checked ? "text-gray-500 line-through" : ""}`}
+          >
+            {item}
+          </CardTitle>
+
           <CardDescription> Anzahl: {quantity}</CardDescription>
           <CardAction className="self-center">
-            {isChecked && (
+            {checked && (
               <div className="flex gap-2">
                 <Button
                   variant="destructive"
@@ -72,7 +68,8 @@ export default function SingleItem({
                 </Button>
               </div>
             )}
-            {!isChecked && (
+
+            {!checked && (
               <Button
                 className="w-35"
                 variant="outline"

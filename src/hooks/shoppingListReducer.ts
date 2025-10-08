@@ -24,13 +24,15 @@ export default function shoppingListReducer(
       break;
     }
     case "UPDATE_ITEM": {
-      console.log("UPDATE_ITEM ausgelöst");
-      updatedItems = currentItems;
-      // updatedItems = currentItems.map((item) => {
-      //   item.id == action.item.id ? item : (item.checked = action.item.checked);
-      //}); --> fixing this is next todo
+      const actionItemCopy = { ...action.item, checked: !action.item.checked };
+
+      updatedItems = currentItems.map((item) =>
+        item.id === action.item.id ? actionItemCopy : item
+      );
+
       break;
     }
+
     default: {
       updatedItems = currentItems;
     }
